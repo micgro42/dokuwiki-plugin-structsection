@@ -1,0 +1,7 @@
+base   structwiki
+author Michael Große
+email  mic.grosse@googlemail.com
+date   2017-06-25
+name   structwiki plugin
+desc   Show struct wiki fields as actaul sections of the page
+url    https://dokuwikiorg/plugin:structwiki
