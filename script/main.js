@@ -1,5 +1,5 @@
 jQuery(() => {
-    jQuery('#plugin__structwiki_output').on('submit', 'form.btn_secedit', function handleEdit(e) {
+    jQuery('#plugin__structsection_output').on('submit', 'form.btn_secedit', function handleEdit(e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -7,7 +7,6 @@ jQuery(() => {
         const pid = JSINFO.id;
         const field = $self.data('struct');
 
-        console.log({ pid, field, $self });
         if (!pid) return;
         if (!field) return;
 

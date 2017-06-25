@@ -1,5 +1,5 @@
 <?php
-namespace dokuwiki\plugin\structwiki\types;
+namespace dokuwiki\plugin\structsection\types;
 
 use dokuwiki\plugin\struct\types\TraitFilterPrefix;
 use dokuwiki\plugin\struct\types\Wiki;

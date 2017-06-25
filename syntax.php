@@ -1,6 +1,6 @@
 <?php
 /**
- * DokuWiki Plugin structwiki (Syntax Component)
+ * DokuWiki Plugin structsection (Syntax Component)
  *
  * @license GPL 2 http://www.gnu.org/licenses/gpl-2.0.html
  * @author  Michael Große <mic.grosse@googlemail.com>
@@ -13,11 +13,11 @@ use dokuwiki\plugin\struct\meta\StructException;
 
 if(!defined('DOKU_INC')) die();
 
-class syntax_plugin_structwiki extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_structsection extends DokuWiki_Syntax_Plugin {
 
     protected $hasBeenRendered = false;
 
-    const XHTML_OPEN = '<div id="plugin__structwiki_output">';
+    const XHTML_OPEN = '<div id="plugin__structsection_output">';
     const XHTML_CLOSE = '</div>';
 
     /**
@@ -47,7 +47,7 @@ class syntax_plugin_structwiki extends DokuWiki_Syntax_Plugin {
      * We do not connect any pattern here, because the call to this plugin is not
      * triggered from syntax but our action component
      *
-     * @asee action_plugin_structwiki
+     * @asee action_plugin_structsection
      * @param string $mode Parser mode
      */
     public function connectTo($mode) {
@@ -116,7 +116,7 @@ class syntax_plugin_structwiki extends DokuWiki_Syntax_Plugin {
             $hasdata = true;
 
             foreach($data as $field) {
-                if(!is_a($field->getColumn()->getType(), \dokuwiki\plugin\structwiki\types\Section::class)) {
+                if(!is_a($field->getColumn()->getType(), \dokuwiki\plugin\structsection\types\Section::class)) {
                     continue;
                 }
                 $lvl = 2;
