@@ -7,7 +7,6 @@ jQuery(() => {
         const pid = JSINFO.id;
         const field = $self.data('struct');
 
-        console.log({ pid, field, $self });
         if (!pid) return;
         if (!field) return;
 
