@@ -1,6 +1,6 @@
 <?php
 /**
- * DokuWiki Plugin structwiki (Action Component)
+ * DokuWiki Plugin structsection (Action Component)
  *
  * @license GPL 2 http://www.gnu.org/licenses/gpl-2.0.html
  * @author  Michael Große <mic.grosse@googlemail.com>
@@ -9,7 +9,7 @@
 // must be run within Dokuwiki
 if (!defined('DOKU_INC')) die();
 
-class action_plugin_structwiki extends DokuWiki_Action_Plugin {
+class action_plugin_structsection extends DokuWiki_Action_Plugin {
 
     /**
      * Registers a callback function for a given event
@@ -51,14 +51,14 @@ class action_plugin_structwiki extends DokuWiki_Action_Plugin {
         $event->data->calls[] = array(
             'plugin',
             array(
-                'structwiki', array('pos' => $pos), DOKU_LEXER_SPECIAL, '',
+                'structsection', array('pos' => $pos), DOKU_LEXER_SPECIAL, '',
             ),
             $pos,
         );
     }
 
     public function handle_init(Doku_Event &$event, $param) {
-        $event->data['Section'] = 'dokuwiki\\plugin\\structwiki\\types\\Section';
+        $event->data['Section'] = 'dokuwiki\\plugin\\structsection\\types\\Section';
     }
 
 }

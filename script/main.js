@@ -1,5 +1,5 @@
 jQuery(() => {
-    jQuery('#plugin__structwiki_output').on('submit', 'form.btn_secedit', function handleEdit(e) {
+    jQuery('#plugin__structsection_output').on('submit', 'form.btn_secedit', function handleEdit(e) {
         e.preventDefault();
         e.stopPropagation();
 
