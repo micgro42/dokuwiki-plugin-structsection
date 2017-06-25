@@ -1,0 +1,8 @@
+textarea.struct_section {
+  width: 30em;
+  min-height: 6em;
+}
+
+.struct_inlineditor textarea.struct_section {
+  min-width: 100%; // min-width is the workaround for `width: auto !important` in DokuWiki's mobile.less
+}
