@@ -1,11 +1,11 @@
 <?php
 /**
- * General tests for the structwiki plugin
+ * General tests for the structsection plugin
  *
- * @group plugin_structwiki
+ * @group plugin_structsection
  * @group plugins
  */
-class general_plugin_structwiki_test extends DokuWikiTest {
+class general_plugin_structsection_test extends DokuWikiTest {
 
     /**
      * Simple test to make sure the plugin.info.txt is in correct format
@@ -24,7 +24,7 @@ class general_plugin_structwiki_test extends DokuWikiTest {
         $this->assertArrayHasKey('desc', $info);
         $this->assertArrayHasKey('url', $info);
 
-        $this->assertEquals('structwiki', $info['base']);
+        $this->assertEquals('structsection', $info['base']);
         $this->assertRegExp('/^https?:\/\//', $info['url']);
         $this->assertTrue(mail_isvalid($info['email']));
         $this->assertRegExp('/^\d\d\d\d-\d\d-\d\d$/', $info['date']);
@@ -45,15 +45,15 @@ class general_plugin_structwiki_test extends DokuWikiTest {
             include($meta_file);
         }
 
-        $this->assertEquals(gettype($conf), gettype($meta),'Both ' . DOKU_PLUGIN . 'structwiki/conf/default.php and ' . DOKU_PLUGIN . 'structwiki/conf/metadata.php have to exist and contain the same keys.');
+        $this->assertEquals(gettype($conf), gettype($meta),'Both ' . DOKU_PLUGIN . 'structsection/conf/default.php and ' . DOKU_PLUGIN . 'structsection/conf/metadata.php have to exist and contain the same keys.');
 
         if (gettype($conf) != 'NULL' && gettype($meta) != 'NULL') {
             foreach($conf as $key => $value) {
-                $this->assertArrayHasKey($key, $meta, 'Key $meta[\'' . $key . '\'] missing in ' . DOKU_PLUGIN . 'structwiki/conf/metadata.php');
+                $this->assertArrayHasKey($key, $meta, 'Key $meta[\'' . $key . '\'] missing in ' . DOKU_PLUGIN . 'structsection/conf/metadata.php');
             }
 
             foreach($meta as $key => $value) {
-                $this->assertArrayHasKey($key, $conf, 'Key $conf[\'' . $key . '\'] missing in ' . DOKU_PLUGIN . 'structwiki/conf/default.php');
+                $this->assertArrayHasKey($key, $conf, 'Key $conf[\'' . $key . '\'] missing in ' . DOKU_PLUGIN . 'structsection/conf/default.php');
             }
         }
 
