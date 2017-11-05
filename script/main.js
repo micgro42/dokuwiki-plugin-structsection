@@ -1,4 +1,16 @@
 jQuery(() => {
+    /**
+     * This removes unintended elements created by other plugins and broken for structsection
+     *
+     * Currently it removes the edit-button shown by edittable, which cannot work inside this plugin
+     *
+     * @returns {void}
+     */
+    function cleanOtherPlugins() {
+        jQuery('#plugin__structsection_output').find('.editbutton_table').remove();
+    }
+    cleanOtherPlugins();
+
     jQuery('#plugin__structsection_output').on('submit', 'form.btn_secedit', function handleEdit(e) {
         e.preventDefault();
         e.stopPropagation();
