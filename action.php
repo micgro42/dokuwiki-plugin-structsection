@@ -31,6 +31,8 @@ class action_plugin_structsection extends DokuWiki_Action_Plugin
      */
     final public function appendPluginOutputToPage(Doku_Event $event, $param)
     {
+        static $instructionsAdded = false;
+
         /** @var helper_plugin_struct $struct */
         $struct = plugin_load('helper', 'struct');
         if (!$struct) {
@@ -43,6 +45,12 @@ class action_plugin_structsection extends DokuWiki_Action_Plugin
             dbglog($ACT, __FILE__ .': '.__LINE__);
             return;
         }
+
+        if ($instructionsAdded) {
+            return;
+        }
+
+        $instructionsAdded = true;
 
         $last = end($event->data->calls);
         $pos = $last[2];
