@@ -6,12 +6,9 @@
  * @author  Michael Große <mic.grosse@googlemail.com>
  */
 
-// must be run within Dokuwiki
 use dokuwiki\plugin\struct\meta\AccessTable;
 use dokuwiki\plugin\struct\meta\Assignments;
 use dokuwiki\plugin\struct\meta\StructException;
-
-if(!defined('DOKU_INC')) die();
 
 class syntax_plugin_structsection extends DokuWiki_Syntax_Plugin {
 
