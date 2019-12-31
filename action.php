@@ -6,9 +6,6 @@
  * @author  Michael Große <mic.grosse@googlemail.com>
  */
 
-// must be run within Dokuwiki
-if (!defined('DOKU_INC')) die();
-
 class action_plugin_structsection extends DokuWiki_Action_Plugin {
 
     /**
