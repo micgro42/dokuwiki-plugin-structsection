@@ -1,5 +1,6 @@
 /* global process */
 const webpack = require('webpack');
+const path = require('path');
 
 // fix for https://github.com/webpack/webpack/issues/2537
 if (process.argv.indexOf('-p') !== -1) {
@@ -9,7 +10,8 @@ if (process.argv.indexOf('-p') !== -1) {
 module.exports = {
     entry: './script/main.js',
     output: {
-        filename: 'lib/bundle.js',
+        path: path.resolve(__dirname, 'lib/'),
+        filename: 'bundle.js',
     },
     module: {
         rules: [
