@@ -53,7 +53,9 @@ class action_plugin_structsection extends DokuWiki_Action_Plugin
         $instructionsAdded = true;
 
         $last = end($event->data->calls);
-        $pos = $last[2];
+
+        $INSTRUCTION_POSITION_INDEX = 2;
+        $pos = $last[$INSTRUCTION_POSITION_INDEX];
 
         $event->data->calls[] = array(
             'plugin',
