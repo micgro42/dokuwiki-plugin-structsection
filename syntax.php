@@ -138,7 +138,8 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
                 $pos += strlen($field->getColumn()->getTranslatedLabel());
                 $R->section_open($lvl);
                 if ($mode === 'xhtml') {
-                    $R->doc = substr($R->doc, 0, -2) . ' data-struct="' . hsc($field->getColumn()->getFullQualifiedLabel()) . '">' . "\n";
+                    $structDataAttribute = 'data-struct="' . hsc($field->getColumn()->getFullQualifiedLabel()) . '"';
+                    $R->doc = substr($R->doc, 0, -2) . ' ' . $structDataAttribute . '>' . "\n";
                 }
                 $field->render($R, $mode);
                 $R->section_close();
