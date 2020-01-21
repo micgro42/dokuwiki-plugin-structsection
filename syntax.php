@@ -11,7 +11,7 @@ use dokuwiki\plugin\struct\meta\AccessTable;
 use dokuwiki\plugin\struct\meta\Assignments;
 use dokuwiki\plugin\struct\meta\StructException;
 
-class syntax_plugin_structsection extends DokuWiki_Syntax_Plugin
+class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
 {
 
     protected $hasBeenRendered = false;
@@ -62,10 +62,10 @@ class syntax_plugin_structsection extends DokuWiki_Syntax_Plugin
      * @param string $match The match of the syntax
      * @param int $state The state of the handler
      * @param int $pos The position in the document
-     * @param Doku_Handler $handler The handler
+     * @param \Doku_Handler $handler The handler
      * @return array Data for the renderer
      */
-    public function handle($match, $state, $pos, Doku_Handler $handler)
+    public function handle($match, $state, $pos, \Doku_Handler $handler)
     {
         // this is never called
         return array();
@@ -77,11 +77,11 @@ class syntax_plugin_structsection extends DokuWiki_Syntax_Plugin
      * Currently completely renderer agnostic
      *
      * @param string $mode Renderer mode
-     * @param Doku_Renderer $R The renderer
+     * @param \Doku_Renderer $R The renderer
      * @param array $handlerData The data from the handler() function
      * @return bool If rendering was successful.
      */
-    public function render($mode, Doku_Renderer $R, $handlerData)
+    public function render($mode, \Doku_Renderer $R, $handlerData)
     {
         global $ID;
         global $INFO;
