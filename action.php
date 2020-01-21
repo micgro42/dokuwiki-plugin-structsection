@@ -42,7 +42,7 @@ class action_plugin_structsection extends DokuWiki_Action_Plugin
         global $ACT;
 
         if (act_clean($ACT) != 'show') {
-            dbglog($ACT, __FILE__ .': '.__LINE__);
+            dbglog($ACT, __FILE__ . ': ' . __LINE__);
             return;
         }
 
@@ -76,7 +76,6 @@ class action_plugin_structsection extends DokuWiki_Action_Plugin
     {
         $event->data['Section'] = 'dokuwiki\\plugin\\structsection\\types\\Section';
     }
-
 }
 
 // vim:ts=4:sw=4:et:

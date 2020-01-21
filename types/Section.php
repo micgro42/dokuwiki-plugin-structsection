@@ -1,10 +1,12 @@
 <?php
+
 namespace dokuwiki\plugin\structsection\types;
 
 use dokuwiki\plugin\struct\types\TraitFilterPrefix;
 use dokuwiki\plugin\struct\types\Wiki;
 
-class Section extends Wiki {
+class Section extends Wiki
+{
     use TraitFilterPrefix;
 
     protected $config = array(
@@ -25,11 +27,12 @@ class Section extends Wiki {
      *
      * @return string
      */
-    public function valueEditor($name, $rawvalue, $htmlID) {
+    public function valueEditor($name, $rawvalue, $htmlID)
+    {
         $rawvalue = formText($rawvalue);
         $params = array(
             'name' => $name,
-            'class' => 'struct_'.strtolower($this->getClass()),
+            'class' => 'struct_' . strtolower($this->getClass()),
             'id' => $htmlID,
             'placeholder' => $this->config['placeholder'],
         );
