@@ -22,7 +22,6 @@ jQuery(() => {
         if (!pid) return;
         if (!field) return;
 
-
         // prepare the edit overlay
         const $div = jQuery('<div class="struct_inlineditor"><form></form><div class="err"></div></div>');
         const $form = $div.find('form');
@@ -82,8 +81,7 @@ jQuery(() => {
                 .fail((data) => {
                     // something went wrong, display error
                     $errors.text(data.responseText).show();
-                })
-            ;
+                });
         });
 
         /**

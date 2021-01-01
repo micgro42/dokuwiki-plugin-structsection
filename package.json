@@ -5,23 +5,21 @@
   "author": "Michael Große <mic.grosse@googlemail.com>",
   "license": "GPL-2.0",
   "scripts": {
-    "dev": "webpack -d",
-    "watch": "webpack -dw",
-    "test": "qunit -c _jstest/testmodule.js -t _jstest/test.js",
-    "build": "webpack -p",
+    "dev": "webpack --mode development",
+    "watch": "webpack -w --mode development",
+    "build": "webpack --mode production",
     "eslint": "NODE_ENV=production eslint script/main.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
+    "@babel/core": "^7.12.10",
     "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.2.2",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-loader": "^3.0.3",
-    "eslint-plugin-import": "^2.20.0",
-    "qunit": "^2.9.3",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1"
   }
 }
