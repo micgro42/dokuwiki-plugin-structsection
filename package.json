@@ -1,6 +1,6 @@
 {
   "name": "structsection",
-  "description": "Show struct wiki fields as actaul sections of the page",
+  "description": "Show struct wiki fields as actual sections of the page",
   "repository": "https://github.com/micgro42/dokuwiki-plugin-structsection",
   "author": "Michael Große <mic.grosse@googlemail.com>",
   "license": "GPL-2.0",
