@@ -43,7 +43,6 @@ class action_plugin_structsection extends \DokuWiki_Action_Plugin
         global $ACT;
 
         if (act_clean($ACT) != 'show') {
-            dbglog($ACT, __FILE__ . ': ' . __LINE__);
             return;
         }
 
