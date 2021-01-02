@@ -18,6 +18,8 @@ jQuery(() => {
         const $self = jQuery(this).parent().prev().find('div.level2'); // fixme: too fragile!
         const pid = JSINFO.id;
         const field = $self.data('struct');
+        const { rev } = JSINFO.plugin_structsection;
+        const rid = 0;
 
         if (!pid) return;
         if (!field) return;
@@ -30,6 +32,8 @@ jQuery(() => {
         const $cancel = jQuery('<button>Cancel</button>');
         $form.append(jQuery('<input type="hidden" name="pid">').val(pid));
         $form.append(jQuery('<input type="hidden" name="field">').val(field));
+        $form.append(jQuery('<input type="hidden" name="rid">').val(rid));
+        $form.append(jQuery('<input type="hidden" name="rev">').val(rev));
         $form.append('<input type="hidden" name="call" value="plugin_struct_inline_save">');
         $form.append(jQuery('<div class="ctl">').append($save).append($cancel));
 
@@ -42,6 +46,8 @@ jQuery(() => {
                 call: 'plugin_struct_inline_editor',
                 pid,
                 field,
+                rid,
+                rev,
             },
             (data) => {
                 if (!data) return; // we're done
@@ -74,8 +80,10 @@ jQuery(() => {
                 $form.serialize(),
             )
                 .done((data) => {
+                    const saved = JSON.parse(data);
+                    $self.html(saved.value);
+                    JSINFO.plugin_structsection.rev = saved.rev;
                     // save succeeded display new value and close editor
-                    $self.html(data);
                     $div.remove();
                 })
                 .fail((data) => {
