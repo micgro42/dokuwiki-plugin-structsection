@@ -118,7 +118,7 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
         $hasdata = false;
         foreach ($tables as $table) {
             try {
-                $schemadata = AccessTable::byTableName($table, $ID, $REV);
+                $schemadata = AccessTable::getPageAccess($table, $ID, $REV);
             } catch (StructException $ignored) {
                 continue; // no such schema at this revision
             }
