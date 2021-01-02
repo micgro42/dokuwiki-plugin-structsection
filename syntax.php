@@ -16,8 +16,8 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
 
     protected $hasBeenRendered = false;
 
-    const XHTML_OPEN = '<div id="plugin__structsection_output">';
-    const XHTML_CLOSE = '</div>';
+    private const XHTML_OPEN = '<div id="plugin__structsection_output">';
+    private const XHTML_CLOSE = '</div>';
 
     /**
      * @return string Syntax mode type
