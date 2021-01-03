@@ -17,9 +17,8 @@ final class action_plugin_structsection extends \DokuWiki_Action_Plugin
      * @param \Doku_Event_Handler $controller DokuWiki's event controller object
      * @return void
      */
-    public function register(\Doku_Event_Handler $controller): void
-    {
-        $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'addPageRevisionToJSINFO');
+    public function register(\Doku_Event_Handler $controller): void {
+      $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'addPageRevisionToJSINFO');
         $controller->register_hook('PARSER_HANDLER_DONE', 'AFTER', $this, 'appendPluginOutputToPage');
         $controller->register_hook('PLUGIN_STRUCT_TYPECLASS_INIT', 'BEFORE', $this, 'registerTypeWithStructPlugin');
     }
