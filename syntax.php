@@ -1,17 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+use dokuwiki\plugin\struct\meta\{AccessTable, Assignments, StructException};
+
 /**
  * DokuWiki Plugin structsection (Syntax Component)
  *
  * @license GPL 2 http://www.gnu.org/licenses/gpl-2.0.html
  * @author  Michael Große <mic.grosse@googlemail.com>
  */
-
-use dokuwiki\plugin\struct\meta\AccessTable;
-use dokuwiki\plugin\struct\meta\Assignments;
-use dokuwiki\plugin\struct\meta\StructException;
-
-class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
+final class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
 {
 
     protected $hasBeenRendered = false;
@@ -22,7 +21,7 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
     /**
      * @return string Syntax mode type
      */
-    public function getType()
+    public function getType(): string
     {
         return 'substition';
     }
@@ -30,7 +29,7 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
     /**
      * @return string Paragraph type
      */
-    public function getPType()
+    public function getPType(): string
     {
         return 'block';
     }
@@ -38,7 +37,7 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
     /**
      * @return int Sort order - Low numbers go before high numbers
      */
-    public function getSort()
+    public function getSort(): int
     {
         return 155;
     }
@@ -52,7 +51,7 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
      * @asee action_plugin_structsection
      * @param string $mode Parser mode
      */
-    public function connectTo($mode)
+    public function connectTo($mode): void
     {
     }
 
@@ -65,10 +64,10 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
      * @param \Doku_Handler $handler The handler
      * @return array Data for the renderer
      */
-    public function handle($match, $state, $pos, \Doku_Handler $handler)
+    public function handle($match, $state, $pos, \Doku_Handler $handler): array
     {
         // this is never called
-        return array();
+        return [];
     }
 
     /**
@@ -81,7 +80,7 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
      * @param array $handlerData The data from the handler() function
      * @return bool If rendering was successful.
      */
-    public function render($mode, \Doku_Renderer $R, $handlerData)
+    public function render($mode, \Doku_Renderer $R, $handlerData): bool
     {
         global $ID;
         global $INFO;
