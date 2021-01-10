@@ -32,5 +32,5 @@ jobs:
 
             - name: run PHP codesniffer
               run: phpcs -q --standard=_test/phpcs.xml --report=checkstyle lib/plugins/structsection
-                  | sed 's/dokuwiki\/lib\/plugins\/structsection\///'
+                  | sed 's/lib\/plugins\/structsection\///'
                   | cs2pr
