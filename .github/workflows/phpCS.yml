@@ -29,6 +29,6 @@ jobs:
               run: sh travis.sh
 
             - name: run PHP codesniffer
-              run: phpcs -q --standard=_test/phpcs.xml --report=checkstyle lib/plugins/structsection \
-                  | sed -r 's/dokuwiki\/lib\/plugins\///' \
+              run: phpcs -q --standard=_test/phpcs.xml --report=checkstyle lib/plugins/structsection
+                  | sed -r 's/dokuwiki\/lib\/plugins\///'
                   | cs2pr
