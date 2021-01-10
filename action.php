@@ -18,7 +18,7 @@ final class action_plugin_structsection extends \DokuWiki_Action_Plugin
      * @return void
      */
     public function register(\Doku_Event_Handler $controller): void {
-      $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'addPageRevisionToJSINFO');
+     $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'addPageRevisionToJSINFO');
         $controller->register_hook('PARSER_HANDLER_DONE', 'AFTER', $this, 'appendPluginOutputToPage');
         $controller->register_hook('PLUGIN_STRUCT_TYPECLASS_INIT', 'BEFORE', $this, 'registerTypeWithStructPlugin');
     }
@@ -30,9 +30,8 @@ final class action_plugin_structsection extends \DokuWiki_Action_Plugin
     {
         global $ACT;
 
-        if (act_clean($ACT) !== 'show') {
-            return;
-        }
+        if (act_clean($ACT) !== 'show') return;
+
         global $JSINFO, $INFO;
         $JSINFO['plugin_structsection'] = [
             'rev' => $INFO['currentrev'],
