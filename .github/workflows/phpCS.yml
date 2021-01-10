@@ -18,8 +18,8 @@ jobs:
             - name: retrieve script
               run: wget https://raw.github.com/splitbrain/dokuwiki-travis/master/travis.sh
 
-            - name: print current directory
-              run: pwd
+            - name: print current directory contents
+              run: ls
 
             - name: Install DokuWiki
               env:
@@ -27,8 +27,8 @@ jobs:
                   DOKUWIKI : master
               run: sh travis.sh
 
-            - name: print current directory
-              run: pwd
+            - name: print current directory contents
+              run: ls
 
             - name: run PHP codesniffer
               run: phpcs -q --standard=_test/phpcs.xml --report=checkstyle lib/plugins/structsection
