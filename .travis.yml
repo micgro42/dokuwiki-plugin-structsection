@@ -12,7 +12,9 @@ env:
   - DOKUWIKI=stable
 matrix:
   allow_failures:
-    - php: ["nightly", "8.0"]
+    - php:
+      - "8.0"
+      - "nightly"
 before_install: wget https://raw.github.com/splitbrain/dokuwiki-travis/master/travis.sh
 install: sh travis.sh
 script: cd _test && ./phpunit.phar --stderr --group plugin_structsection
