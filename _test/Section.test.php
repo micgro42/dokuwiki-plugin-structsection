@@ -12,9 +12,6 @@ use dokuwiki\plugin\structsection\types\Section;
  */
 class SectionTest extends PHPUnit\Framework\TestCase {
 
-    /** @var array alway enable the needed plugins */
-    protected $pluginsEnabled = array('struct', 'sqlite');
-
     public function test_valueEditorTest() {
         $section = new Section();
         $name ='testName';
