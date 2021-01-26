@@ -11,6 +11,7 @@ jobs:
         strategy:
             matrix:
                 php-versions: ['7.2', '7.3', '7.4']
+                dokuwiki-branch: [ 'master', 'stable']
             fail-fast: false
 
         steps:
@@ -21,7 +22,7 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php-versions }}
-                  extensions: mbstring, intl, PDO, pdo_sqlite, pdo_mysql, pdo_pgsql, bz2
+                  extensions: mbstring, intl, PDO, pdo_sqlite, bz2
 
             - name: Setup problem matchers
               run: |
@@ -34,15 +35,13 @@ jobs:
             - name: Run DokuWiki Test-setup
               env:
                   CI_SERVER: 1
-                  DOKUWIKI: master
+                  DOKUWIKI: ${{ matrix.dokuwiki-branch }}
               run: sh travis.sh
 
             - name: Setup PHPUnit
               run: |
                   php _test/fetchphpunit.php
                   cd _test
-                  cp mysql.conf.php.dist mysql.conf.php
-                  cp pgsql.conf.php.dist pgsql.conf.php
 
             - name: Run PHPUnit
               run: |
