@@ -49,7 +49,7 @@ final class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
      * We do not connect any pattern here, because the call to this plugin is not
      * triggered from syntax but our action component
      *
-     * @asee action_plugin_structsection
+     * @see action_plugin_structsection
      * @param string $mode Parser mode
      */
     public function connectTo($mode): void
@@ -75,6 +75,8 @@ final class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
      * Render schema data
      *
      * Currently completely renderer agnostic
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      *
      * @param string $mode Renderer mode
      * @param \Doku_Renderer $R The renderer
