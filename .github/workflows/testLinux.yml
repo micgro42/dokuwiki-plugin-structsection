@@ -11,6 +11,7 @@ jobs:
         strategy:
             matrix:
                 php-versions: ['7.2', '7.3', '7.4']
+                dokuwiki-branch: [ 'master', 'stable']
             fail-fast: false
 
         steps:
@@ -34,7 +35,7 @@ jobs:
             - name: Run DokuWiki Test-setup
               env:
                   CI_SERVER: 1
-                  DOKUWIKI: master
+                  DOKUWIKI: ${{ matrix.dokuwiki-branch }}
               run: sh travis.sh
 
             - name: Setup PHPUnit
