@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+namespace dokuwiki\plugin\structsection\test;
+
 use dokuwiki\plugin\structsection\types\Section;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for the struct Section type
@@ -10,7 +13,7 @@ use dokuwiki\plugin\structsection\types\Section;
  * @group plugin_structsection
  * @group plugins
  */
-class SectionTest extends PHPUnit\Framework\TestCase {
+class SectionTest extends TestCase {
 
     public function test_valueEditorTest() {
         $section = new Section();
