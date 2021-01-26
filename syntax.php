@@ -85,7 +85,7 @@ final class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
         global $ID;
         global $INFO;
         global $REV;
-        if ($ID != $INFO['id']) {
+        if ($handlerData['id'] !== $ID) {
             return true;
         }
         if (!$INFO['exists']) {
