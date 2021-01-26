@@ -32,6 +32,9 @@ jobs:
               run: wget https://raw.github.com/splitbrain/dokuwiki-travis/master/travis.sh
 
             - name: Run DokuWiki Test-setup
+              env:
+                  CI_SERVER: 1
+                  DOKUWIKI: master
               run: sh travis.sh
 
             - name: Setup PHPUnit
