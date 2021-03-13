@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-use dokuwiki\plugin\struct\meta\{AccessTable, Assignments, StructException};
+use dokuwiki\plugin\struct\meta\{AccessTable, Assignments, StructException, Value};
+use dokuwiki\plugin\structsection\types\Section;
 
 /**
  * DokuWiki Plugin structsection (Syntax Component)
@@ -48,7 +49,7 @@ final class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
      * We do not connect any pattern here, because the call to this plugin is not
      * triggered from syntax but our action component
      *
-     * @asee action_plugin_structsection
+     * @see action_plugin_structsection
      * @param string $mode Parser mode
      */
     public function connectTo($mode): void
@@ -75,6 +76,8 @@ final class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
      *
      * Currently completely renderer agnostic
      *
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
      * @param string $mode Renderer mode
      * @param \Doku_Renderer $R The renderer
      * @param array $handlerData The data from the handler() function
@@ -85,65 +88,26 @@ final class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
         global $ID;
         global $INFO;
         global $REV;
-        if ($ID != $INFO['id']) {
+        if ($handlerData['id'] !== $ID) {
             return true;
         }
         if (!$INFO['exists']) {
             return true;
         }
-        if ($this->hasBeenRendered) {
-            return true;
-        }
 
-        // do not render the output twice on the same page, e.g. when another page has been included
-        $this->hasBeenRendered = true;
-        try {
-            $assignments = Assignments::getInstance();
-        } catch (StructException $e) {
-            return false;
-        }
-        $tables = $assignments->getPageAssignments($ID);
-        if (!$tables) {
+        $assignments = Assignments::getInstance();
+        $tablesAssignedToThisPage = $assignments->getPageAssignments($ID);
+        if (!$tablesAssignedToThisPage) {
             return true;
         }
 
         $pos = $handlerData['pos'];
         if ($mode == 'xhtml') {
-            $R->finishSectionEdit($pos - 1);
+            $R->finishSectionEdit($pos - 1); // FIXME: shouldn't this be $R->startSectionEdit ?
             $R->doc .= self::XHTML_OPEN;
         }
 
-
-        $hasdata = false;
-        foreach ($tables as $table) {
-            try {
-                $schemadata = AccessTable::getPageAccess($table, $ID, $REV);
-            } catch (StructException $ignored) {
-                continue; // no such schema at this revision
-            }
-            $schemadata->optionSkipEmpty(false);
-            $data = $schemadata->getData();
-            if (!count($data)) {
-                continue;
-            }
-            $hasdata = true;
-
-            foreach ($data as $field) {
-                if (!is_a($field->getColumn()->getType(), \dokuwiki\plugin\structsection\types\Section::class)) {
-                    continue;
-                }
-                $lvl = 2;
-                $R->header($field->getColumn()->getTranslatedLabel(), $lvl, $pos);
-                $pos += strlen($field->getColumn()->getTranslatedLabel());
-                $R->section_open($lvl);
-                if ($mode === 'xhtml') {
-                    $structDataAttribute = 'data-struct="' . hsc($field->getColumn()->getFullQualifiedLabel()) . '"';
-                    $R->doc = substr($R->doc, 0, -2) . ' ' . $structDataAttribute . '>' . "\n";
-                }
-                $field->render($R, $mode);
-                $R->section_close();
-            }
-        }
+        $hasRenderedSomething = $this->renderTables($R, $mode, $tablesAssignedToThisPage, $ID, $REV, $pos);
 
         if ($mode == 'xhtml') {
             $R->finishSectionEdit($pos);
@@ -151,11 +115,65 @@ final class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
         }
 
         // if no data has been output, remove empty wrapper again
-        if ($mode == 'xhtml' && !$hasdata) {
+        if ($mode == 'xhtml' && !$hasRenderedSomething) {
             $R->doc = substr($R->doc, 0, -1 * strlen(self::XHTML_OPEN . self::XHTML_CLOSE));
         }
 
         return true;
+    }
+
+    private function renderTables($R, $mode, $tables, $ID, $REV, $pos): bool
+    {
+        $hasRenderedSomething = false;
+        foreach ($tables as $table) {
+            $data = $this->getTableData($table, $ID, $REV);
+            if ($data === null) {
+                continue;
+            }
+
+            foreach ($data as $field) {
+                if (!is_a($field->getColumn()->getType(), Section::class)) {
+                    continue;
+                }
+                $hasRenderedSomething = true;
+                $this->renderSection($R, $field, $mode, $pos);
+                $pos += strlen($field->getColumn()->getTranslatedLabel());
+            }
+        }
+        return $hasRenderedSomething;
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     *
+     * @return Value[]|null
+     */
+    private function getTableData(string $tablename, string $ID, int $REV)
+    {
+        try {
+            $schemadata = AccessTable::getPageAccess($tablename, $ID, $REV);
+        } catch (StructException $ignored) {
+            return null; // no such schema at this revision
+        }
+        $schemadata->optionSkipEmpty(false);
+        $data = $schemadata->getData();
+        if (!count($data)) {
+            return null;
+        }
+        return $data;
+    }
+
+    private function renderSection(\Doku_Renderer $R, Value $field, string $mode, int $pos): void
+    {
+        $lvl = 2;
+        $R->header($field->getColumn()->getTranslatedLabel(), $lvl, $pos);
+        $R->section_open($lvl);
+        if ($mode === 'xhtml') {
+            $structDataAttribute = 'data-struct="' . hsc($field->getColumn()->getFullQualifiedLabel()) . '"';
+            $R->doc = substr($R->doc, 0, -2) . ' ' . $structDataAttribute . '>' . "\n";
+        }
+        $field->render($R, $mode);
+        $R->section_close();
     }
 }
 

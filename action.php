@@ -45,25 +45,21 @@ final class action_plugin_structsection extends \DokuWiki_Action_Plugin
      */
     final public function appendPluginOutputToPage(\Doku_Event $event, $param): void
     {
-        static $instructionsAdded = false;
-
         /** @var \helper_plugin_struct $struct */
         $struct = plugin_load('helper', 'struct');
         if (!$struct) {
             return;
         }
 
-        global $ACT;
+        global $ACT, $ID;
 
         if (act_clean($ACT) != 'show') {
             return;
         }
 
-        if ($instructionsAdded) {
+        if (!$event->data->getStatus('section')) {
             return;
         }
-
-        $instructionsAdded = true;
 
         $last = end($event->data->calls);
 
@@ -73,7 +69,7 @@ final class action_plugin_structsection extends \DokuWiki_Action_Plugin
         $event->data->calls[] = [
             'plugin',
             [
-                'structsection', ['pos' => $pos], DOKU_LEXER_SPECIAL, '',
+                'structsection', ['pos' => $pos, 'id' => $ID], DOKU_LEXER_SPECIAL, '',
             ],
             $pos,
         ];

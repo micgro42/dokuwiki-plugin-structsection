@@ -1,4 +1,4 @@
-name: Linux Unit Tests
+name: PHP Tests on Linux
 
 on: [push, pull_request]
 

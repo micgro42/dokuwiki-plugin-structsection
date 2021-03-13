@@ -29,3 +29,23 @@ jobs:
               run: phpcs -q --standard=_test/phpcs.xml --report=checkstyle lib/plugins/structsection
                   | sed 's/lib\/plugins\/structsection\///'
                   | cs2pr
+
+    phpmd:
+        name: PHP Mess Detector
+        runs-on: ubuntu-latest
+        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '7.2'
+                  tools: phpmd
+
+            - name: Print PHPMD version
+              run: phpmd --version
+
+            - name: run PHP Mess Detector
+              # FIXME: replace ansi by github after next phpmd release
+              run: phpmd . ansi cleancode,codesize,design
