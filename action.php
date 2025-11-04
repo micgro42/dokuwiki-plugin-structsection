@@ -9,7 +9,6 @@
 
 class action_plugin_structsection extends \DokuWiki_Action_Plugin
 {
-
     /**
      * Registers a callback function for a given event
      *
