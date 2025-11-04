@@ -15,7 +15,7 @@ jQuery(() => {
         e.preventDefault();
         e.stopPropagation();
 
-        const $self = jQuery(this).parent().prev().find('div.level2'); // fixme: too fragile!
+        const $self = jQuery(this).parents('.section_highlight_wrapper').find('div[data-struct]');
         const pid = JSINFO.id;
         const field = $self.data('struct');
         const { rev } = JSINFO.plugin_structsection;
