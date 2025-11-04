@@ -4,6 +4,7 @@
   "repository": "https://github.com/micgro42/dokuwiki-plugin-structsection",
   "author": "Michael Große <mic.grosse@googlemail.com>",
   "license": "GPL-2.0",
+  "type": "module",
   "scripts": {
     "dev": "webpack --mode development",
     "watch": "webpack -w --mode development",
@@ -15,10 +16,8 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^10.0.0",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^7.16.0",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint": "^9.39.1",
     "eslint-loader": "^4.0.2",
-    "eslint-plugin-import": "^2.32.0",
     "webpack": "^5.102.1",
     "webpack-cli": "^6.0.1"
   },
