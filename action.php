@@ -1,5 +1,9 @@
 <?php
 
+use dokuwiki\Extension\ActionPlugin;
+use dokuwiki\Extension\EventHandler;
+use dokuwiki\Extension\Event;
+
 /**
  * DokuWiki Plugin structsection (Action Component)
  *
@@ -7,22 +11,22 @@
  * @author  Michael Große <mic.grosse@googlemail.com>
  */
 
-class action_plugin_structsection extends \DokuWiki_Action_Plugin
+class action_plugin_structsection extends ActionPlugin
 {
     /**
      * Registers a callback function for a given event
      *
-     * @param \Doku_Event_Handler $controller DokuWiki's event controller object
+     * @param EventHandler $controller DokuWiki's event controller object
      * @return void
      */
-    public function register(\Doku_Event_Handler $controller)
+    public function register(EventHandler $controller)
     {
         $controller->register_hook('DOKUWIKI_STARTED', 'AFTER', $this, 'addPageRevisionToJSINFO');
         $controller->register_hook('PARSER_HANDLER_DONE', 'AFTER', $this, 'appendPluginOutputToPage');
         $controller->register_hook('PLUGIN_STRUCT_TYPECLASS_INIT', 'BEFORE', $this, 'registerTypeWithStructPlugin');
     }
 
-    public function addPageRevisionToJSINFO(\Doku_Event $event, $param)
+    public function addPageRevisionToJSINFO(Event $event, $param)
     {
         global $ACT;
 
@@ -38,12 +42,12 @@ class action_plugin_structsection extends \DokuWiki_Action_Plugin
     /**
      * Event handler for PARSER_HANDLER_DONE
      *
-     * @param \Doku_Event $event event object by reference
+     * @param Event $event event object by reference
      * @param mixed $param [the parameters passed as fifth argument to register_hook() when this
      *                           handler was registered]
      * @return void
      */
-    final public function appendPluginOutputToPage(\Doku_Event $event, $param)
+    final public function appendPluginOutputToPage(Event $event, $param)
     {
         static $instructionsAdded = false;
 
@@ -70,22 +74,16 @@ class action_plugin_structsection extends \DokuWiki_Action_Plugin
         $INSTRUCTION_POSITION_INDEX = 2;
         $pos = $last[$INSTRUCTION_POSITION_INDEX];
 
-        $event->data->calls[] = array(
-            'plugin',
-            array(
-                'structsection', array('pos' => $pos), DOKU_LEXER_SPECIAL, '',
-            ),
-            $pos,
-        );
+        $event->data->calls[] = ['plugin', ['structsection', ['pos' => $pos], DOKU_LEXER_SPECIAL, ''], $pos];
     }
 
     /**
      * Event handler for PLUGIN_STRUCT_TYPECLASS_INIT
      *
-     * @param \Doku_Event $event
+     * @param Event $event
      * @param            $param
      */
-    final public function registerTypeWithStructPlugin(\Doku_Event $event, $param)
+    final public function registerTypeWithStructPlugin(Event $event, $param)
     {
         $event->data['Section'] = 'dokuwiki\\plugin\\structsection\\types\\Section';
     }
