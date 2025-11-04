@@ -1,1 +1,1 @@
-/* DOKUWIKI:include lib/bundle.js */
+/* DOKUWIKI:include script/main.js */
