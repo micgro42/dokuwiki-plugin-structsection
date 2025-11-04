@@ -6,20 +6,10 @@
   "license": "GPL-2.0",
   "type": "module",
   "scripts": {
-    "dev": "webpack --mode development",
-    "watch": "webpack -w --mode development",
-    "build": "webpack --mode production",
     "eslint": "NODE_ENV=production eslint script/main.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^10.0.0",
-    "babel-preset-env": "^1.7.0",
-    "eslint": "^9.39.1",
-    "eslint-loader": "^4.0.2",
-    "webpack": "^5.102.1",
-    "webpack-cli": "^6.0.1"
+    "eslint": "^9.39.1"
   },
   "packageManager": "yarn@4.10.3"
 }
