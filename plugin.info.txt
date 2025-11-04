@@ -1,7 +1,7 @@
 base   structsection
 author Michael Große
 email  mic.grosse@googlemail.com
-date   2021-01-02
+date   2025-11-04
 name   Struct Sections
 desc   New type to show struct wiki fields as actual sections of the page
 url    https://dokuwiki.org/plugin:structsection
