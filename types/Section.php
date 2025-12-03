@@ -9,14 +9,15 @@ class Section extends Wiki
 {
     use TraitFilterPrefix;
 
-    protected $config = array(
+    protected $config = [
         'prefix' => '',
         'postfix' => '',
-        'placeholder' => '', // ToDo: Make translatable
+        'placeholder' => '',
+        // ToDo: Make translatable
         'visibility' => [
             'ineditor' => true, // removing the inpage-key to prevent early rendering
-        ]
-    );
+        ],
+    ];
 
     /**
      * Use a text area for input
@@ -30,12 +31,7 @@ class Section extends Wiki
     public function valueEditor($name, $rawvalue, $htmlID)
     {
         $rawvalue = formText($rawvalue);
-        $params = array(
-            'name' => $name,
-            'class' => 'struct_' . strtolower($this->getClass()),
-            'id' => $htmlID,
-            'placeholder' => $this->config['placeholder'],
-        );
+        $params = ['name' => $name, 'class' => 'struct_' . strtolower($this->getClass()), 'id' => $htmlID, 'placeholder' => $this->config['placeholder']];
         $attributes = buildAttributes($params, true);
 
         return "<textarea $attributes>$rawvalue</textarea>";

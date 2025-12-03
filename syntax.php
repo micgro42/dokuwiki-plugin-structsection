@@ -7,11 +7,13 @@
  * @author  Michael Große <mic.grosse@googlemail.com>
  */
 
+use dokuwiki\Extension\SyntaxPlugin;
+use dokuwiki\plugin\structsection\types\Section;
 use dokuwiki\plugin\struct\meta\AccessTable;
 use dokuwiki\plugin\struct\meta\Assignments;
 use dokuwiki\plugin\struct\meta\StructException;
 
-class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
+class syntax_plugin_structsection extends SyntaxPlugin
 {
     protected $hasBeenRendered = false;
 
@@ -67,7 +69,7 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
     public function handle($match, $state, $pos, \Doku_Handler $handler)
     {
         // this is never called
-        return array();
+        return [];
     }
 
     /**
@@ -129,7 +131,7 @@ class syntax_plugin_structsection extends \DokuWiki_Syntax_Plugin
             $hasdata = true;
 
             foreach ($data as $field) {
-                if (!is_a($field->getColumn()->getType(), \dokuwiki\plugin\structsection\types\Section::class)) {
+                if (!is_a($field->getColumn()->getType(), Section::class)) {
                     continue;
                 }
                 $lvl = 2;
